@@ -1,0 +1,571 @@
+/* -------------------------------------------------------------- */
+/* GLOBAL */
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mali&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0%;
+    top: 0%;
+    width: 100%;
+    background-image: url('../images/background.jpg');
+}
+
+/* BOTÕES */
+button {
+    width: 80%;
+    border: 1px solid black;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 4px 2px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+img {
+    object-fit: contain;
+}
+
+.comprar-produto {
+    border: 2px solid #4CAF50;
+    background-color: white;
+}
+
+.comprar-produto:hover {
+    background-color: #4CAF50;
+}
+
+.detalhes-produto:hover {
+    background-color: #ffffff;
+}
+
+.adicionar-carrinho {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+}
+
+button:hover {
+    background-color: #c2c2c2;
+}
+
+select {
+    width: 200px;
+    border: none;
+    color: black;
+    border: 1px solid #4CAF50;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 12px;
+    transition-duration: 0.1s;
+    cursor: pointer;
+}
+
+select:hover {
+    background-color: white;
+    border: 1px solid #4CAF50;
+}
+
+/*NAV BAR*/
+nav {
+    font-family: 'Finger Paint', cursive;
+    position: fixed;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #5a3795;
+    font-weight: bolder;
+    z-index: 1;
+}
+
+nav ul {
+    text-align: center;
+}
+
+nav li {
+    margin-right: 10%;
+    display: inline-block;
+    transition-duration: 0.3s;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+nav li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 10px;
+    text-decoration: none;
+    font-size: 20px;
+    text-shadow: 0 0 2px white;
+
+}
+
+nav li a:hover {
+    background-color: #c9c9c965;
+    text-shadow: 0 0 1px black;
+
+    text-decoration: none;
+    transition: 0.3s;
+    color: white;
+
+}
+
+nav .logo {
+    width: 100px;
+    float: left;
+}
+
+
+/* MAIN*/
+main {
+    text-align: center;
+    text-decoration: none;
+    padding: 1%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+
+/* PRECO */
+.traco {
+    text-decoration: line-through wavy;
+}
+
+.preco-atual {
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+}
+
+/*FOOTER*/
+.rodape {
+    text-align: center;
+    background-color: white;
+    font-family: 'Neucha', cursive;
+    font-size: 20px;
+    font-family: 'Mali', cursive;
+}
+.rodape .rodape-contato {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+	justify-content: space-around;
+
+} 
+
+.rodape .rodape-contato span img {
+    width: 15px;
+}
+
+/* TITULOS */
+header {
+    background-color: white;
+}
+
+.titulo {
+    font-family: 'Permanent Marker', cursive;
+    text-shadow: 1px 1px 20px white;
+
+    color: rgb(14, 12, 12);
+    font-size: 5vw;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+.subtitulo {
+    font-family: 'Neucha', cursive;
+    font-size: 40px;
+    text-shadow: 1px 1px 20px white;
+}
+
+
+
+/* -------------------------------------------------------------- */
+/* PÁGINA INICIAL HTML */
+.container-rosto {
+    display: flex;
+    justify-content: center;
+}
+
+.rosto {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: #ffcd00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rosto::before {
+    content: '';
+    position: absolute;
+    top: 180px;
+    width: 150px;
+    height: 70px;
+    background: #b57700;
+    border-bottom-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+    transition: 0.5s;
+}
+
+.rosto:hover::before {
+    content: '';
+    top: 210px;
+    width: 150px;
+    height: 10px;
+    background: #b57700;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.olhos {
+    position: relative;
+    top: -40px;
+    display: flex;
+}
+
+.olhos .olho {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: block;
+    background: #fff;
+    margin: 0 15px;
+    border-radius: 50%;
+}
+
+.olhos .olho::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 25px;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: #333;
+    border-radius: 50%;
+}
+
+/* -------------------------------------------------------------- */
+/* PRODUTOS HTML */
+
+/* GRID */
+.produtos-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+}
+
+/* CATEGORIAS */
+.produtos-container .categorias .lista-categorias {
+    padding: 0%;
+    margin: 0%;
+    width: 95%;
+}
+
+.produtos-container .categorias ul {
+    width: 100%;
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.produtos-container .categorias ul li {
+    -moz-transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+
+}
+
+/* BOX LISTA PRODUTOS */
+.produtos-container .box-produto {
+    background-color: white;
+    padding: 0%;
+    margin: 0%;
+    width: 95%;
+    
+    text-align: center;
+    border-style: inset;
+    border-color: rgb(135, 175, 255);
+}
+
+.produtos-container .box-produto .titulo-produto {
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.produtos-container .box-produto .imagem-produto {
+    width: 200px;
+    height: 200px;
+}
+
+.produtos-container .box-produto .preco {
+    font-weight: bold;
+}
+
+
+/* BOTOES */
+
+.produtos-container .menu-botoes {
+    font-size: medium;
+}
+
+.produtos-container .menu-botoes:hover {
+    background-color: #a0a0a0;
+}
+
+.produtos-container .detalhes-produto {
+    background-color: white;
+    border: 2px solid #555555;
+}
+
+.produtos-container .detalhes-produto:hover {
+    background-color: #999999;
+}
+
+.produtos-container .adicionar-carrinho {
+    background-color: white;
+    color: black;
+    border: 2px solid #008CBA;
+}
+
+.produtos-container .adicionar-carrinho:hover {
+    background-color: #008CBA;
+}
+
+
+/* -------------------------------------------------------------- */
+/* DETALHES PRODUTO HTML*/
+.container-main {
+    display: grid;
+    grid-template-areas: 'coletania-imagens imagem detalhes';
+    background-color: white;
+}
+
+/* COLETANIA IMAGENS */
+.container-coletania-imagens {
+    grid-area: coletania-imagens;
+    grid-column: 0.1 / 3;
+    text-align: left;
+    width: 100px;
+}
+
+.container-coletania-imagens ul {
+    line-height: 390%;
+    margin-top: -1px;
+    margin-left: -15px;
+}
+
+.container-coletania-imagens img {
+    width: 80px;
+    padding: 5px;
+    height: 80px;
+    border: 1px dotted black;
+    object-fit: contain;
+
+}
+
+.container-coletania-imagens .button-coletania {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+
+}
+
+/* IMAGEM */
+.container-imagem {
+    grid-area: imagem;
+    grid-column: 2 / 3;
+    width: 700px;
+}
+
+.container-imagem img {
+    min-width: 50%;
+    min-width: 50%;
+    max-width: 400px;
+    max-width: 400px;
+    object-fit: contain;
+}
+
+/* DETALHES */
+.container-detalhes {
+    grid-area: detalhes;
+    grid-column: 3 / 3;
+    
+}
+
+.container-detalhes .titulo-produto {
+    font-family: 'Neucha', cursive;
+
+}
+
+.container-detalhes section {
+    margin-right: 5%;
+    padding-bottom: 10px;
+    float: right;
+    background-color: #f1f1f1;
+    border: 1px dotted #333;
+    width: 400px;
+}
+
+.container-detalhes section p {
+    text-align: start;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.descricao-produto {
+    margin: 2%;
+    padding: 10px;
+    text-align: left;
+    background-color: white;
+}
+
+
+.descricao-produto .avaliacoes .lado {
+    float: left;
+    width: 15%;
+    margin-top: 10px;
+}
+
+.descricao-produto .avaliacoes .meio {
+    margin-top: 10px;
+    float: left;
+    width: 70%;
+}
+
+.descricao-produto .avaliacoes .direito {
+    text-align: right;
+}
+
+.descricao-produto .avaliacoes .row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* The progresso container */
+.descricao-produto .avaliacoes .progresso-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+}
+
+/* Individual bars */
+.descricao-produto .avaliacoes .progresso-5 {
+    width: 60%;
+    height: 18px;
+    background-color: #4CAF50;
+}
+
+.descricao-produto .avaliacoes .progresso-4 {
+    width: 30%;
+    height: 18px;
+    background-color: #2196F3;
+}
+
+.descricao-produto .avaliacoes .progresso-3 {
+    width: 10%;
+    height: 18px;
+    background-color: #00bcd4;
+}
+
+.descricao-produto .avaliacoes .progresso-2 {
+    width: 4%;
+    height: 18px;
+    background-color: #ff9800;
+}
+
+.descricao-produto .avaliacoes .progresso-1 {
+    width: 15%;
+    height: 18px;
+    background-color: #f44336;
+}
+
+
+/* -------------------------------------------------------------- */
+/* LOJAS HTML */
+
+.loja-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: rgba(255, 255, 255, 0.7);
+    font-family: 'Neucha', cursive;
+    font-size: 20px;
+}
+
+.loja-container .info {
+    width: 85%;
+    text-align: center;
+}
+
+/* -------------------------------------------------------------- */
+/* CONTATOS HTML */
+
+.contato-container {
+    grid-gap: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Neucha', cursive;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    width: 40%;
+    margin-left: 30%;
+    border: 1px dashed black;
+
+    
+}
+
+
+.contato-container input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 0 10px 10px;
+    width: 80%;
+}
+
+.contato-container textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 100px;
+    padding: 10px 0 10px 10px;
+    width: 80%;
+    resize: vertical
+}
+
+
+.contato-container p {
+    padding-top: 15px;
+    margin: 1%;
+}
+
+
+.contato-container button {
+    background-color: #c7c7c7;
+    color: black;
+
+    cursor: pointer;
+    width: 80%;
+}
+
+.contato-container button:hover {
+    background-color: #45a049;
+    color: white;
+    border-radius: 4px;
+}
