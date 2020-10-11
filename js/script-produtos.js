@@ -1,5 +1,5 @@
 
-const URL_PRODUTOS = "https://raw.githubusercontent.com/hpbonfim/recodepro/master/PROJETOS/PROJETOJS/JSON/produtos.json"
+const URL_PRODUTOS = "https://raw.githubusercontent.com/hpbonfim/fullstack-eletro/master/JSON/produtos.json"
 let arrayObjetos = new Array()
 
 /* FUNÇOES */
@@ -24,8 +24,8 @@ fetch(URL_PRODUTOS)
         Object.entries(produtos).map(todosProdutos => arrayObjetos.push(todosProdutos))
 
         localStorage.setItem("objetos", JSON.stringify(produtos))
-        carregarListaCategorias(), // Carrega a lista de categorias
-            mostrarTodosProdutos() // Mostra todos os produtos
+        carregarListaCategorias() // Carrega a lista de categorias
+        mostrarTodosProdutos() // Mostra todos os produtos
 
     }).catch(err => {
         alert("Verifique sua conexão com a internet e tente novamente!")
