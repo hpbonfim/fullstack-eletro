@@ -32,6 +32,7 @@ CREATE TABLE `pedidos` (
   `nome_cliente` varchar(1000) NOT NULL,
   `endereco_cliente` varchar(1000) NOT NULL,
   `telefone_cliente` varchar(1000) NOT NULL,
+  `id_produto` int NOT NULL,
   `nome_produto` varchar(1000) NOT NULL,
   `valor_unitario_produto` int NOT NULL,
   `quantidade_produto` int NOT NULL,
