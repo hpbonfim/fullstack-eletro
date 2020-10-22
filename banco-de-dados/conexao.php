@@ -12,5 +12,4 @@
         die("A conexão com o Banco de dados falhou: " . mysqli_connect_error());
     }
 
-    echo "<script>Alert('Banco conectado');</script>"
 ?>

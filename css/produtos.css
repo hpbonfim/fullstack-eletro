@@ -72,6 +72,11 @@
     border: 2px solid #555555;
 }
 
+.produtos-container .detalhes-produto a{
+    text-decoration: none;
+}
+
+
 .produtos-container .detalhes-produto:hover {
     background-color: #999999;
 }
