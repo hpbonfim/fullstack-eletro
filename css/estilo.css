@@ -16,39 +16,26 @@ body {
 
 /* BOTÕES */
 button {
-    width: 80%;
-    border: 1px solid black;
-    color: black;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 12px;
-    margin: 4px 2px;
-    transition-duration: 0.3s;
-    cursor: pointer;
+    width: 100%;
+}
+
+.button {
+    width: 100%;
 }
 
 img {
     object-fit: contain;
 }
 
-.comprar-produto {
-    border: 2px solid #4CAF50;
-    background-color: white;
-}
-
-.comprar-produto:hover {
-    background-color: #4CAF50;
-}
-
-.detalhes-produto:hover {
-    background-color: #ffffff;
-}
-
-.adicionar-carrinho {
+.categorias {
+    border: 2px solid #c9c9c9;
     background-color: white;
     color: black;
-    border: 2px solid #008CBA;
+    font-weight: bold;
+}
+
+.categorias:hover {
+    background-color: #c9c9c965;
 }
 
 button:hover {
@@ -75,54 +62,25 @@ select:hover {
 /*NAV BAR*/
 nav {
     font-family: 'Bebas Neue', cursive;
-    position: fixed;
-    top: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background-color: #5a3795;
-    font-weight: bolder;
-    z-index: 1;
-}
-
-nav ul {
-    text-align: center;
-}
-
-nav li {
-    margin-right: 10%;
-    display: inline-block;
-    transition-duration: 0.3s;
-    cursor: pointer;
-    border-radius: 15px;
-}
-
-nav li a {
-    display: block;
-    color:  #ffd634;
-    text-align: center;
-    padding: 14px 10px;
-    text-decoration: none;
     font-size: 25px;
-    text-shadow: 0 0 2px black;
-
+    background-color: rgba(255, 255, 255, 0);
 }
+
 
 nav li a:hover {
     background-color: #c9c9c965;
-    text-shadow: 0 0 1px black;
-
-    text-decoration: none;
+    text-shadow: 0 0 1px whitesmoke;
     transition: 0.3s;
+}
+
+.badge {
+    position: absolute;
+    font-size: 15px;
+    margin-left: -5px;
+    margin-top: -10px;
+    background-color: rgba(39, 35, 35, 0.822);
     color: white;
-
-}
-
-nav .logo {
-    width: 100px;
-    float: left;
-}
-
+  }
 
 /* MAIN*/
 main {
@@ -160,7 +118,6 @@ ul {
     flex: 1;
     flex-direction: row;
 	justify-content: space-around;
-
 } 
 
 .rodape .rodape-contato span img {

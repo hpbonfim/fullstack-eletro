@@ -2,15 +2,7 @@
 /* -------------------------------------------------------------- */
 /* LOJAS HTML */
 
-.loja-container {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    background-color: rgba(255, 255, 255, 0.7);
+.info {
     font-family: 'Neucha', cursive;
     font-size: 20px;
-}
-
-.loja-container .info {
-    width: 85%;
-    text-align: center;
 }

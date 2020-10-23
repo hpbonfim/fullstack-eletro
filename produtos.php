@@ -64,85 +64,111 @@ filtrarLista();
 <head>
     <meta charset="utf-8">
     <title>Produtos - Full Stack Eletro</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="stylesheet" href="./css/produtos.css">
-    <!-- <script src="./js/script-produtos.js"></script> -->
-
+    <script src="./js/script-produtos.js"></script>
 </head>
 
 <body>
     <!-- MENU -->
-    <nav>
-        <ul>
-            <a href="index.html"> <img class="logo" src="./images/logo.png" alt="Logo"> </a>
-            <li> <a href="index.html"> Início </a> </li>
-            <li> <a href="produtos.php"> Produtos </a> </li>
-            <li> <a href="loja.html"> Nossas Lojas </a> </li>
-            <li> <a href="contato.html"> Fale Conosco </a> </li>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="index.php">
+            <img src="./images/logo.png" width="100" height="50" class="d-inline-block align-top" alt="" loading="lazy">
+        </a>
+
+        <ul class="navbar-nav mx-auto ">
+            <li class="nav-item  ">
+                <a class="nav-link col px-md-5" href="index.php"> Início</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link col px-md-5" href="produtos.php"> Produtos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link col px-md-5" href="loja.php"> Nossas Lojas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link col px-md-5" href="contato.php"> Fale Conosco</a>
+            </li>
         </ul>
+
+        <a class="navbar-brand" href="index.php">
+            <img src="./images/carrinho_vazio.png" width="50" height="50" class="d-inline-block align-top" alt="carrinho_vazio">
+            <span class='badge badge-pill'>0</span>
+        </a>
     </nav>
     <!-- FIM DO MENU -->
 
-    <br><br><br><br>
-
     <!-- MAIN-->
-    <main>
-        <p class="titulo"> Nossos Produtos </p>
-        <p class="subtitulo">Aqui em nossa loja, os preços cabem no seu bolso!</p>
+    <div class="container-fluid">
+        <main>
+            <p class="titulo"> Nossos Produtos </p>
+            <p class="subtitulo">Aqui em nossa loja, os preços cabem no seu bolso!</p>
 
-        <!-- CONTEÚDO -->
-        <div class="produtos-container">
-            <section class="categorias" id="categorias">
-                <h2 class="subtitulo"> Categorias </h2>
-                <ul class="lista-categorias" id="listaCategorias">
+            <!-- CONTEÚDO -->
 
-                    <?php while ($dado = $categorias->fetch_array()) { ?>
-                        <li>
-                            <a href="produtos.php?categoria=<?php echo $dado['categoria_produto']; ?>">
-                                <button class="menu-botoes"><strong><?php echo $dado['categoria_produto'];  ?> (<?php echo $dado['COUNT(categoria_produto)']; ?>)</strong></button>
-                            </a>
-                        </li>
-                    <?php } ?>
+            <div class="row row-cols-4">
+
+                <section class="col ">
+                    <h2 class="subtitulo nav-link"> Categorias </h2>
                     <?php while ($dado = $total_produtos->fetch_array()) { ?>
-                        <li>
-                            <a href="produtos.php">
-                                <button class="menu-botoes"><strong>Mostrar Tudo (<?php echo $dado['COUNT(ALL id_produto)']; ?>)</strong></button>
-                            </a>
-                        </li>
+                        <a class="nav-link " href="produtos.php">
+                            <button class="btn categorias text-dark " style="color: white;">Mostrar Tudo (<?php echo $dado['COUNT(ALL id_produto)']; ?>)</button>
+                        </a>
                     <?php } ?>
-                </ul>
-            </section>
-            <?php while ($dado = $resultado->fetch_array()) { ?>
-                <div class="box-produto" id="<?php echo $dado['id_produto']; ?>">
-                    <br>
-                    <img class="imagem-produto" src="<?php echo $dado['imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
-                    <hr>
-                    <br>
-                    <span class="titulo-produto">
-                        <?php echo $dado['nome_produto']; ?>
-                    </span>
-                    <p class="descricao">
-                        <em class="traco">De <?php echo $dado['preco_antigo_produto']; ?></em>
-                        <br>
-                        <br>
-                        <span>Por apenas:
-                            <br>
-                            <strong class="preco-atual"> <?php echo $dado['preco_produto']; ?></strong>
-                            <br>
-                        </span>
-                        <a href="detalhe-produto.php?ID=<?php echo $dado['id_produto']; ?>"><button class="detalhes-produto">DETALHES</button></a>
-                        <a href=""><button class="adicionar-carrinho">COLOCAR NO CARRINHO</button></a>
-                        <a href=""><button class="comprar-produto">COMPRAR</button></a>
-                    </p>
-                </div>
-            <?php } ?>
+                    <?php while ($dado = $categorias->fetch_array()) { ?>
+                        <a class="nav-link" href="produtos.php?categoria=<?php echo $dado['categoria_produto']; ?>">
+                            <button class="btn categorias text-dark" style="color: white;"><?php echo $dado['categoria_produto'];  ?> (<?php echo $dado['COUNT(categoria_produto)']; ?>)</button>
+                        </a>
+                    <?php } ?>
+                </section>
 
-            <!-- PRODUTOS SERÃO PREENCHIDOS AUTOMATICAMENTE-->
-        </div>
-    </main>
+                <?php while ($dado = $resultado->fetch_array()) { ?>
+                    <section class="col">
+                        <br>
+                        <div class="col ">
+                            <div class="card" style="width: 18rem;" id="<?php echo $dado['id_produto']; ?>">
+                                <img class="card-img-top" src="<?php echo $dado['imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $dado['nome_produto']; ?></h5>
+                                    <hr>
+                                    <p class="card-text">
+                                        <em class="traco" id="precoAntigoProduto<?php echo $dado['id_produto']; ?>">
+                                            <script>
+                                                formatarValor(<?php echo $dado['preco_antigo_produto']; ?>, 'precoAntigoProduto<?php echo $dado['id_produto']; ?>')
+                                            </script>
+                                        </em>
+                                        <br>
+                                        <strong class="preco-atual" id="precoAtualProduto<?php echo $dado['id_produto']; ?>">
+                                            <script>
+                                                formatarValor(<?php echo $dado['preco_produto']; ?>, 'precoAtualProduto<?php echo $dado['id_produto']; ?>')
+                                            </script>
+                                            <br>a vista.
+                                        </strong>
+                                    </p>
+                                    <div class="modal-footer">
+                                        <a class="button" href="detalhe-produto.php?ID=<?php echo $dado['id_produto']; ?>">
+                                            <button type="button" class="btn btn-info ">Ver Detalhes</button>
+                                        </a>
+                                        <a class="button" href="detalhe-produto.php?ID=<?php echo $dado['id_produto']; ?>">
+                                            <button type="button" class="btn btn-primary">Colocar no Carrinho</button>
+                                        </a>
+
+                                        <a class="button" href="detalhe-produto.php?ID=<?php echo $dado['id_produto']; ?>">
+                                            <button type="button" class="btn btn-success">Comprar</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                <?php } ?>
+
+            </div>
+        </main>
+    </div>
     <!-- FIM CONTEÚDO -->
 
-    <br><br><br><br>
+
 
 
     <!-- FOOTER -->

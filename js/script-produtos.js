@@ -1,123 +1,37 @@
+const visualizarImagemSelecionada = (coletaniaImagensImg, tituloProduto) => {
+    if (coletaniaImagensImg != null && coletaniaImagensImg != undefined) {
+        const imagemProdutoId = document.getElementById("imagemProduto")
+        const novaImgTag = `<img src="${coletaniaImagensImg}" alt="${tituloProduto}">`
+        imagemProdutoId.innerHTML = novaImgTag
+    }
+    return
+}
 
-const URL_PRODUTOS = "https://raw.githubusercontent.com/hpbonfim/fullstack-eletro/master/JSON/produtos.json"
-let arrayObjetos = new Array()
+const calcularParcelas = (precoAtualProduto) => {
+    const precoParcelado = document.getElementById("precoParcelado")
+    const valorTotal = precoAtualProduto.replace(/\D/g, "") // TRANSFORMA STRING EM NÚMERO
 
-/* FUNÇOES */
-// carregarListaCategorias
-// filtrarCategoria
-// mostrarTodosProdutos
-// listarObjetos
-// limparLista
-// verDetalhesProduto
-/* ----- */
+    function formatarValorParcelas(valor) {
+        return valor.toLocaleString('pt-br', {
+            style: 'currency',
+            currency: 'BRL'
+        })
+    }
+
+    for (let vezes = 2; vezes <= 10; vezes++) {
+        let valorParcelas = valorTotal / vezes
+        // valorParcelas /= 100 // remover uma casa decimal
+        if (valorParcelas < 0)
+            return
+        precoParcelado.innerHTML += `<option value="">${vezes} x ${formatarValorParcelas(valorParcelas)} sem juros</option>`
+    }
+}
 
 
-
-/* ------------------------------ DOWNLOAD DADOS DO GITHUB ----------------------------- */
-/* TODO - CONSUMIR TUDO DE LOCALSTORAGE APÓS DOWNLOAD */
-fetch(URL_PRODUTOS)
-    .then(res => res.json())
-    .then(data => {
-        const { produtos } = data
-
-        // Transforma JSON Objects em Arrays e salva local
-        Object.entries(produtos).map(todosProdutos => arrayObjetos.push(todosProdutos))
-
-        localStorage.setItem("objetos", JSON.stringify(produtos))
-        carregarListaCategorias() // Carrega a lista de categorias
-        mostrarTodosProdutos() // Mostra todos os produtos
-
-    }).catch(err => {
-        alert("Verifique sua conexão com a internet e tente novamente!")
-        console.error(err)
+const formatarValor = (valor, elementId) => {
+    const element = document.getElementById(elementId)
+    return element.innerHTML = valor.toLocaleString('pt-br', {
+        style: 'currency',
+        currency: 'BRL'
     })
-
-
-
-/* ------------------------------  LISTA DE CATEGORIAS ----------------------------- */
-const carregarListaCategorias = () => {
-    let listaCategoriasId = document.getElementById('listaCategorias')
-    let quantidadeTotal = 0
-
-    arrayObjetos.map((produto, index) => {
-        let tituloProduto = produto[0]
-        let quantidadeProduto = produto[1].quantidades
-        quantidadeTotal += quantidadeProduto
-        return listaCategoriasId.innerHTML += `<li><button class="menu-botoes" onclick='filtrarCategoria(${index}, ${index})'>${tituloProduto} <strong>(${quantidadeProduto})</strong></li>`
-    })
-
-    listaCategoriasId.innerHTML += `<li><button class="menu-botoes" onclick='mostrarTodosProdutos(${quantidadeTotal})'>Mostrar Tudo <strong>(${quantidadeTotal})</strong></li>`
-
-}
-
-
-/* ------------------------------  MOSTRAR TODAS AS CATEGORIAS ----------------------------- */
-const mostrarTodosProdutos = () => {
-    limparLista() // REMOVE TODOS OS BOX DO PRODUTO ANTES DE FILTRAR
-    for (let i = 0; i < arrayObjetos.length; i++) { listarObjetos(i, i) }
-}
-
-
-/* ------------------------------  MOSTRAR TODAS AS CATEGORIAS ----------------------------- */
-const filtrarCategoria = (categoriaProdutoId, itemId) => {
-    limparLista() // REMOVE TODOS OS BOX DO PRODUTO ANTES DE FILTRAR
-    listarObjetos(categoriaProdutoId, itemId)
-}
-
-
-/* ------------------------------  FILTRAR CATEGORIAS ----------------------------- */
-const listarObjetos = (categoriaProdutoId, itemId) => {
-    let categorias = document.getElementById("categorias")
-    let array = arrayObjetos[itemId][1]
-
-    array.itens.map(item => {
-        categorias.insertAdjacentHTML('afterend', `
-        <div class="box-produto">
-            <br>
-            <img class="imagem-produto" src="${item.imagemProduto}" alt="Geladeira brastemp">
-            <hr>
-            <br>
-            <span class="titulo-produto">
-                ${item.tituloProduto}
-            </span>
-            <p class="descricao">
-                <em class="traco">De ${item.precoAntigoProduto}</em>
-                <br>
-                <br>
-                <span>Por apenas:
-                    <br>
-                    <strong class="preco-atual"> ${item.precoAtualProduto}</strong>
-                </span>
-                <button onclick="verDetalhesProduto(${categoriaProdutoId}, ${item.id})" class="detalhes-produto">DETALHES</button>
-                <button onclick="carrinhoDeCompras(${categoriaProdutoId}, ${item.id})" class="adicionar-carrinho">COLOCAR NO CARRINHO</button>
-                <button onclick="comprarProduto(${categoriaProdutoId}, ${item.id})" class="comprar-produto">COMPRAR</button>
-            </p>
-        </div>
-        `
-        )
-    })
-}
-
-
-/* ------------------------------  LIMPAR LISTA DE FILTRAGEM DOS PRODUTOS ----------------------------- */
-const limparLista = () => {
-    return document.querySelectorAll('.box-produto').forEach(elemento => elemento.remove())
-}
-
-
-/* ------------------------------  REDIRECIONA PARA PÁGINA DETALHES  ----------------------------- */
-const verDetalhesProduto = (categoriaProdutoId, itemId) => {
-    let produtoSelecionado = arrayObjetos[categoriaProdutoId][1].itens[itemId]
-
-    sessionStorage.setItem("detalhesProduto", JSON.stringify(produtoSelecionado)) // ARMAZENA O PRODUTO EM SESSÃO
-
-    window.location.href = "detalhe-produto.html"
-}
-
-const carrinhoDeCompras = (categoriaProdutoId, itemId) => {
-    alert("Funcionalidade em breve")
-}
-
-const comprarProduto = (categoriaProdutoId, itemId) => {
-    alert("Funcionalidade em breve")
 }

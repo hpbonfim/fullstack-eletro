@@ -1,152 +1,48 @@
-
 /* -------------------------------------------------------------- */
 /* DETALHES PRODUTO HTML*/
-.container-main {
-    display: grid;
-    grid-template-areas: 'coletania-imagens imagem detalhes';
-    background-color: white;
-}
 
 /* COLETANIA IMAGENS */
-.container-coletania-imagens {
-    grid-area: coletania-imagens;
-    grid-column: 0.1 / 3;
-    text-align: left;
-    width: 100px;
-}
-
-.container-coletania-imagens ul {
-    line-height: 390%;
-    margin-top: -1px;
-    margin-left: -15px;
+.container-coletania-imagens ul li {
+    margin-bottom: 1vw;
+    margin-left: -2vw;
 }
 
 .container-coletania-imagens img {
     width: 80px;
-    padding: 5px;
     height: 80px;
-    border: 1px dotted black;
     object-fit: contain;
-
-}
-
-.container-coletania-imagens .button-coletania {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
-    display: inline-block;
-
 }
 
 /* IMAGEM */
-.container-imagem {
-    grid-area: imagem;
-    grid-column: 2 / 3;
-    width: 700px;
-}
 
 .container-imagem img {
-    min-width: 50%;
-    min-width: 50%;
-    max-width: 400px;
-    max-width: 400px;
+    margin-left: -10vw;
+    min-width: 10vw;
+    min-width: 10vw;
+    max-width: 53vw;
+    max-width: 53vw;
     object-fit: contain;
 }
 
 /* DETALHES */
-.container-detalhes {
-    grid-area: detalhes;
-    grid-column: 3 / 3;
-    
-}
 
-.container-detalhes .titulo-produto {
-    font-family: 'Neucha', cursive;
-
-}
-
-.container-detalhes section {
-    margin-right: 5%;
-    padding-bottom: 10px;
-    float: right;
+.card {
     background-color: #f1f1f1;
     border: 1px dotted #333;
     width: 400px;
-}
-
-.container-detalhes section p {
-    text-align: start;
-    margin-left: 10px;
-    margin-right: 10px;
 }
 
 .descricao-produto {
     margin: 2%;
     padding: 10px;
     text-align: left;
-    background-color: white;
+    background-color: #f1f1f1;
 }
 
 
-.descricao-produto .avaliacoes .lado {
-    float: left;
-    width: 15%;
-    margin-top: 10px;
-}
-
-.descricao-produto .avaliacoes .meio {
-    margin-top: 10px;
-    float: left;
-    width: 70%;
-}
-
-.descricao-produto .avaliacoes .direito {
-    text-align: right;
-}
-
-.descricao-produto .avaliacoes .row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* The progresso container */
 .descricao-produto .avaliacoes .progresso-container {
     width: 100%;
     background-color: #f1f1f1;
     text-align: center;
     color: white;
 }
-
-/* Individual bars */
-.descricao-produto .avaliacoes .progresso-5 {
-    width: 60%;
-    height: 18px;
-    background-color: #4CAF50;
-}
-
-.descricao-produto .avaliacoes .progresso-4 {
-    width: 30%;
-    height: 18px;
-    background-color: #2196F3;
-}
-
-.descricao-produto .avaliacoes .progresso-3 {
-    width: 10%;
-    height: 18px;
-    background-color: #00bcd4;
-}
-
-.descricao-produto .avaliacoes .progresso-2 {
-    width: 4%;
-    height: 18px;
-    background-color: #ff9800;
-}
-
-.descricao-produto .avaliacoes .progresso-1 {
-    width: 15%;
-    height: 18px;
-    background-color: #f44336;
-}
-

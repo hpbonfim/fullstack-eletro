@@ -21,146 +21,129 @@ if (isset($ID_PRODUTO)) {
 <head>
     <meta charset="UTF-8">
     <title>Detalhe do Produto - Full Stack Eletro</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/detalhes-produto.css">
+    <script src="./js/script-produtos.js"></script>
 </head>
-<script>
-    const visualizarImagemSelecionada = (coletaniaImagensImg, tituloProduto) => {
-        if (coletaniaImagensImg != null && coletaniaImagensImg != undefined) {
-            const imagemProdutoId = document.getElementById("imagemProduto")
-            const novaImgTag = `<img src="${coletaniaImagensImg}" alt="${tituloProduto}">`
-            imagemProdutoId.innerHTML = novaImgTag
-        }
-        return
-    }
-
-    const calcularParcelas = (precoAtualProduto) => {
-        const precoParcelado = document.getElementById("precoParcelado")
-        const valorTotal = precoAtualProduto.replace(/\D/g, "") // TRANSFORMA STRING EM NÚMERO
-
-        function formatarValorParcelas(valor) {
-            return valor.toLocaleString('pt-br', {
-                style: 'currency',
-                currency: 'BRL'
-            })
-        }
-
-        for (let vezes = 2; vezes <= 10; vezes++) {
-            let valorParcelas = valorTotal / vezes
-            // valorParcelas /= 100 // remover uma casa decimal
-            if (valorParcelas < 0)
-                return
-            precoParcelado.innerHTML += `<option value="">${vezes} x ${formatarValorParcelas(valorParcelas)} sem juros</option>`
-        }
-    }
-
-
-    const formatarValor = (valor, elementId) => {
-        const element = document.getElementById(elementId)
-        return element.innerHTML = valor.toLocaleString('pt-br', {
-            style: 'currency',
-            currency: 'BRL'
-        })
-    }
-</script>
 <?php while ($dado = $resultado->fetch_array()) { ?>
 
     <body onload="calcularParcelas('<?php echo $dado['preco_produto']; ?>')">
+
         <!-- MENU -->
-        <nav>
-            <ul>
-                <a href="index.html"> <img class="logo" src="./images/logo.png" alt="Logo"> </a>
-                <li> <a href="index.html"> Início </a> </li>
-                <li> <a href="produtos.php"> Produtos </a> </li>
-                <li> <a href="loja.html"> Nossas Lojas </a> </li>
-                <li> <a href="contato.html"> Fale Conosco </a> </li>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="index.php">
+                <img src="./images/logo.png" width="100" height="50" class="d-inline-block align-top" alt="" loading="lazy">
+            </a>
+
+            <ul class="navbar-nav mx-auto ">
+                <li class="nav-item  ">
+                    <a class="nav-link col px-md-5" href="index.php"> Início</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link col px-md-5" href="produtos.php"> Produtos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link col px-md-5" href="loja.php"> Nossas Lojas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link col px-md-5" href="contato.php"> Fale Conosco</a>
+                </li>
             </ul>
+
+            <a class="navbar-brand" href="index.php">
+                <img src="./images/carrinho_vazio.png" width="50" height="50" class="d-inline-block align-top" alt="carrinho_vazio">
+                <span class='badge badge-pill'>0</span>
+            </a>
         </nav>
         <!-- FIM DO MENU -->
 
-        <br><br><br><br><br>
-
-
         <!-- CONTEUDO -->
-        <main class="container-main">
-            <div class="container-coletania-imagens">
-                <div>
-                    <ul id="coletaniaImagensProduto">
-                        <!--AUTO PREENCHER-->
-                        <li>
-                            <button class="button-coletania" onclick="visualizarImagemSelecionada('<?php echo $dado['imagem_produto']; ?>', '<?php echo $dado['nome_produto']; ?>')">
-                                <img src="<?php echo $dado['imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
-                            </button>
-                        </li>
-                        <li>
-                            <button class="button-coletania" onclick="visualizarImagemSelecionada('<?php echo $dado['1_imagem_produto']; ?>', '<?php echo $dado['nome_produto']; ?>')">
-                                <img src="<?php echo $dado['1_imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
-                            </button>
-                        </li>
-                        <li>
-                            <button class="button-coletania" onclick="visualizarImagemSelecionada('<?php echo $dado['2_imagem_produto']; ?>', '<?php echo $dado['nome_produto']; ?>')">
-                                <img src="<?php echo $dado['2_imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
-                            </button>
-                        </li>
-                        <li>
-                            <button class="button-coletania" onclick="visualizarImagemSelecionada('<?php echo $dado['3_imagem_produto']; ?>', '<?php echo $dado['nome_produto']; ?>')">
-                                <img src="<?php echo $dado['3_imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
-                            </button>
-                        </li>
-                        <li>
-                            <button class="button-coletania" onclick="visualizarImagemSelecionada('<?php echo $dado['4_imagem_produto']; ?>', '<?php echo $dado['nome_produto']; ?>')">
-                                <img src="<?php echo $dado['4_imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="container-imagem">
-                <div id="imagemProduto">
-                    <img src="<?php echo $dado['imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
-                </div>
-            </div>
-
-            <div class="container-detalhes">
-                <section>
-                    <h2 class="titulo-produto" id="tituloProduto">
-                        <?php echo $dado['nome_produto']; ?>
-                        <!--AUTO PREENCHER-->
-                    </h2>
-                    <hr>
-                    <p id="descricaoProduto">
-                        <?php echo $dado['descricao_produto']; ?>
-                        <!--AUTO PREENCHER-->
-                    </p>
-                    <br>
-                    <em class="traco" id="precoAntigoProduto">
-                        De: <script>
-                            formatarValor(<?php echo $dado['preco_antigo_produto']; ?>, 'precoAntigoProduto')
-                        </script>
-                    </em>
-                    <br>
-                    <span>
-                        <br>
-                        <strong class="preco-atual" id="precoAtualProduto">
-                            <script>
-                                formatarValor(<?php echo $dado['preco_produto']; ?>, 'precoAtualProduto')
-                            </script>
-                        </strong>
-                        a vista.
-                    </span>
-                    <br>
-                    <br>
-                    <select id="precoParcelado">
-                        <!--AUTO PREENCHER-->
-                    </select>
-                    <br>
-                    <br>
-                    <button class="comprar-produto" onclick="alert('Em breve!')">COMPRAR</button>
-                    <br>
-                    <strong id="quantidadeProduto"></strong>
+        <main class="container-fluid ">
+            <div class="row  row-cols-3 justify-content-between ">
+                <section class="col-1">
+                    <div class="container-coletania-imagens">
+                        <ul id="coletaniaImagensProduto">
+                            <!--AUTO PREENCHER-->
+                            <li>
+                                <a type="button" class="" onclick="visualizarImagemSelecionada('<?php echo $dado['imagem_produto']; ?>', '<?php echo $dado['nome_produto']; ?>')">
+                                    <img src="<?php echo $dado['imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
+                                </a>
+                            </li>
+                            <li>
+                                <a type="button" class="" onclick="visualizarImagemSelecionada('<?php echo $dado['1_imagem_produto']; ?>', '<?php echo $dado['nome_produto']; ?>')">
+                                    <img src="<?php echo $dado['1_imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
+                                </a>
+                            </li>
+                            <li>
+                                <a type="button" class="" onclick="visualizarImagemSelecionada('<?php echo $dado['2_imagem_produto']; ?>', '<?php echo $dado['nome_produto']; ?>')">
+                                    <img src="<?php echo $dado['2_imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
+                                </a>
+                            </li>
+                            <li>
+                                <a type="button" class="" onclick="visualizarImagemSelecionada('<?php echo $dado['3_imagem_produto']; ?>', '<?php echo $dado['nome_produto']; ?>')">
+                                    <img src="<?php echo $dado['3_imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
+                                </a>
+                            </li>
+                            <li>
+                                <a type="button" class="" onclick="visualizarImagemSelecionada('<?php echo $dado['4_imagem_produto']; ?>', '<?php echo $dado['nome_produto']; ?>')">
+                                    <img src="<?php echo $dado['4_imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </section>
 
+                <section class="col">
+                    <div class="container-imagem">
+                        <div id="imagemProduto">
+                            <img src="<?php echo $dado['imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="titulo-produto">
+                                <?php echo $dado['nome_produto']; ?>
+                                <!--AUTO PREENCHER-->
+                            </h2>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $dado['descricao_produto']; ?></h5>
+                        </div>
+                        <p class="card-text">
+                            <span>
+                                <em class="traco" id="precoAntigoProduto">
+                                    <script>
+                                        formatarValor(<?php echo $dado['preco_antigo_produto']; ?>, 'precoAntigoProduto')
+                                    </script>
+                                </em>
+                                <br>
+                                <strong class="preco-atual" id="precoAtualProduto">
+                                    <script>
+                                        formatarValor(<?php echo $dado['preco_produto']; ?>, 'precoAtualProduto')
+                                    </script>
+                                </strong>
+                                a vista.
+                            </span>
+                            <br>
+                            <select id="precoParcelado">
+                                <!--AUTO PREENCHER-->
+                            </select>
+                        </p>
+                        <div class="card-footer">
+                            <a class="button" href="detalhe-produto.php?ID=<?php echo $dado['id_produto']; ?>">
+                                <button type="button" class="btn btn-success">Comprar</button>
+                            </a>
+                            <strong id="quantidadeProduto">
+                                <?php echo $dado['quantidade_produto']; ?>
+                            </strong>
+                        </div>
+                    </div>
+                </section>
             </div>
         </main>
 
@@ -174,7 +157,7 @@ if (isset($ID_PRODUTO)) {
                 <!--AUTO PREENCHER-->
                 <br>
             </p>
-            <br><br>
+
             <h3 class="subtitulo"> Especificações técnicas </h3>
             <hr>
             <ol>
@@ -198,12 +181,13 @@ if (isset($ID_PRODUTO)) {
                 </li>
                 <br>
             </ol>
-            <br><br><br><br><br>
+            <br>
+
             <div class="avaliacoes">
                 <h3 class="subtitulo"> Avaliação dos Usuários </h3>
                 <hr>
-                <div class="avaliacao">
 
+                <div class="avaliacao">
                     <span>Média de 4.1 pontos sobre 254 avaliações realizadas.</span>
                     <span class="estrela">⭐</span>
                     <span class="estrela">⭐</span>
@@ -211,71 +195,14 @@ if (isset($ID_PRODUTO)) {
                     <span class="estrela">⭐</span>
                     <span class="">☆</span>
                 </div>
-
-                <div class="row">
-                    <div class="lado">
-                        <div>5 estrelas</div>
-                    </div>
-                    <div class="meio">
-                        <div class="progresso-container">
-                            <div class="progresso-5"></div>
-                        </div>
-                    </div>
-                    <div class="lado direito">
-                        <div>150</div>
-                    </div>
-                    <div class="lado">
-                        <div>4 estrelas</div>
-                    </div>
-                    <div class="meio">
-                        <div class="progresso-container">
-                            <div class="progresso-4"></div>
-                        </div>
-                    </div>
-                    <div class="lado direito">
-                        <div>63</div>
-                    </div>
-                    <div class="lado">
-                        <div>3 estrelas</div>
-                    </div>
-                    <div class="meio">
-                        <div class="progresso-container">
-                            <div class="progresso-3"></div>
-                        </div>
-                    </div>
-                    <div class="lado direito">
-                        <div>15</div>
-                    </div>
-                    <div class="lado">
-                        <div>2 estrelas</div>
-                    </div>
-                    <div class="meio">
-                        <div class="progresso-container">
-                            <div class="progresso-2"></div>
-                        </div>
-                    </div>
-                    <div class="lado direito">
-                        <div>6</div>
-                    </div>
-                    <div class="lado">
-                        <div>1 estrelas</div>
-                    </div>
-                    <div class="meio">
-                        <div class="progresso-container">
-                            <div class="progresso-1"></div>
-                        </div>
-                    </div>
-                    <div class="lado direito">
-                        <div>20</div>
-                    </div>
-                </div>
+                
             </div>
             <br>
         </section>
         <!-- FIM CONTEÚDO -->
 
 
-        <br><br><br><br>
+
 
         <!-- FOOTER -->
         <footer class="rodape">

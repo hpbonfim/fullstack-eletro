@@ -4,25 +4,46 @@
 <head>
     <meta charset="utf-8">
     <title>Full Stack Eletro</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/index.css">
     <script src="./js/script-index.js"></script>
+
 </head>
 
 <body>
     <!-- MENU -->
-    <nav>
-        <ul>
-            <a href="index.html"> <img class="logo" src="./images/logo.png" alt="Logo"> </a>
-            <li> <a href="index.html"> Início </a> </li>
-            <li> <a href="produtos.php"> Produtos </a> </li>
-            <li> <a href="loja.html"> Nossas Lojas </a> </li>
-            <li> <a href="contato.html"> Fale Conosco </a> </li>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="index.php">
+            <img src="./images/logo.png" width="100" height="50" class="d-inline-block align-top" alt="" loading="lazy">
+        </a>
+
+        <ul class="navbar-nav mx-auto ">
+            <li class="nav-item active ">
+                <a class="nav-link col px-md-5" href="index.php"> Início</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link col px-md-5" href="produtos.php"> Produtos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link col px-md-5" href="loja.php"> Nossas Lojas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link col px-md-5" href="contato.php"> Fale Conosco</a>
+            </li>
         </ul>
+
+        <a class="navbar-brand" href="index.php">
+            <img src="./images/carrinho_vazio.png" width="50" height="50" class="d-inline-block align-top"
+                alt="carrinho_vazio">
+            <span class='badge badge-pill'>0</span>
+        </a>
     </nav>
+
     <!-- FIM DO MENU -->
 
-    <br><br><br><br><br><br>
+  
 
     <!-- MAIN-->
     <main>
@@ -45,7 +66,7 @@
     </main>
     <!-- MAIN-->
 
-    <br><br><br><br>
+    
 
 
     <!-- FOOTER -->

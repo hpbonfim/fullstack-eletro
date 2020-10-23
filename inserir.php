@@ -53,7 +53,7 @@ $SALVAR = null;
 </style>
 
 <body>
-    <br><br>
+    
 
     <div class="container-lg">
 
@@ -63,11 +63,11 @@ $SALVAR = null;
             </button>
         </a>
 
-        <br><br>
+        
 
         <h1>CRIAR PRODUTO</h1>
 
-        <br><br>
+        
 
         <form action="" method="post">
             <div class="form-group">
@@ -131,7 +131,7 @@ $SALVAR = null;
 
             <br>
             <button type="submit" id="SALVAR" name="SALVAR" value="SALVAR"  class="btn btn-success btn-lg btn-block">Criar Produto</button>
-            <br><br><br><br><br><br><br><br><br><br>
+            
         </form>
     </div>
 </body>
