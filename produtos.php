@@ -1,5 +1,25 @@
 <?php include_once("./banco-de-dados/conexao.php");
 
+
+// LISTA SELECT CATEGORIAS
+function listaCategorias()
+{
+    global $conn,  $categorias, $total_produtos;
+
+    // $sql_categorias = "SELECT DISTINCT categoria_produto FROM produtos";
+    $sql_contagem = "SELECT categoria_produto, COUNT(categoria_produto) FROM produtos GROUP BY categoria_produto";
+    $sql_total = "SELECT COUNT(ALL id_produto) FROM produtos";
+
+    if (mysqli_query($conn, $sql_contagem) && mysqli_query($conn, $sql_total)) {
+        $categorias = mysqli_query($conn, $sql_contagem);
+        $total_produtos = mysqli_query($conn, $sql_total);
+    } else {
+        echo "Error: " . $sql_contagem . "<br>" . mysqli_error($conn);
+        echo "Error: " . $total_produtos . "<br>" . mysqli_error($conn);
+    }
+}
+// FIM LISTA
+
 // QUERY
 $SQL;
 $palavra_chave = $_GET["categoria"];
@@ -26,21 +46,15 @@ function filtrarLista()
     $palavra_chave = null;
 }
 
-$resultado;
-filtrarLista();
 
 // FIM QUERY
 
+$resultado;
+$categorias;
+$total_produtos;
 
-// LISTA SELECT CATEGORIAS
-$sql_categorias = "SELECT DISTINCT categoria_produto FROM produtos";
-
-if (mysqli_query($conn, $sql_categorias)) {
-    $categorias = mysqli_query($conn, $sql_categorias);
-} else {
-    echo "Error: " . $sql_categorias . "<br>" . mysqli_error($conn);
-}
-// FIM LISTA
+listaCategorias();
+filtrarLista();
 
 ?>
 
@@ -81,25 +95,27 @@ if (mysqli_query($conn, $sql_categorias)) {
             <section class="categorias" id="categorias">
                 <h2 class="subtitulo"> Categorias </h2>
                 <ul class="lista-categorias" id="listaCategorias">
-                   
+
                     <?php while ($dado = $categorias->fetch_array()) { ?>
                         <li>
                             <a href="produtos.php?categoria=<?php echo $dado['categoria_produto']; ?>">
-                                <button class="menu-botoes"><strong><?php echo $dado['categoria_produto']; ?></strong></button>
+                                <button class="menu-botoes"><strong><?php echo $dado['categoria_produto'];  ?> (<?php echo $dado['COUNT(categoria_produto)']; ?>)</strong></button>
                             </a>
                         </li>
                     <?php } ?>
-                    <li>
-                        <a href="produtos.php">
-                            <button class="menu-botoes"><strong>Mostrar Tudo</strong></button>
-                        </a>
-                    </li>
+                    <?php while ($dado = $total_produtos->fetch_array()) { ?>
+                        <li>
+                            <a href="produtos.php">
+                                <button class="menu-botoes"><strong>Mostrar Tudo (<?php echo $dado['COUNT(ALL id_produto)']; ?>)</strong></button>
+                            </a>
+                        </li>
+                    <?php } ?>
                 </ul>
             </section>
             <?php while ($dado = $resultado->fetch_array()) { ?>
                 <div class="box-produto" id="<?php echo $dado['id_produto']; ?>">
                     <br>
-                    <img class="imagem-produto" src="<?php echo $dado['imagem_produto']; ?>" alt="Geladeira brastemp">
+                    <img class="imagem-produto" src="<?php echo $dado['imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
                     <hr>
                     <br>
                     <span class="titulo-produto">

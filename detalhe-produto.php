@@ -38,7 +38,7 @@ if (isset($ID_PRODUTO)) {
         const precoParcelado = document.getElementById("precoParcelado")
         const valorTotal = precoAtualProduto.replace(/\D/g, "") // TRANSFORMA STRING EM NÚMERO
 
-        function formatarValor(valor) {
+        function formatarValorParcelas(valor) {
             return valor.toLocaleString('pt-br', {
                 style: 'currency',
                 currency: 'BRL'
@@ -50,8 +50,17 @@ if (isset($ID_PRODUTO)) {
             // valorParcelas /= 100 // remover uma casa decimal
             if (valorParcelas < 0)
                 return
-            precoParcelado.innerHTML += `<option value="">${vezes} x ${formatarValor(valorParcelas)} sem juros</option>`
+            precoParcelado.innerHTML += `<option value="">${vezes} x ${formatarValorParcelas(valorParcelas)} sem juros</option>`
         }
+    }
+
+
+    const formatarValor = (valor, elementId) => {
+        const element = document.getElementById(elementId)
+        return element.innerHTML = valor.toLocaleString('pt-br', {
+            style: 'currency',
+            currency: 'BRL'
+        })
     }
 </script>
 <?php while ($dado = $resultado->fetch_array()) { ?>
@@ -126,15 +135,17 @@ if (isset($ID_PRODUTO)) {
                     </p>
                     <br>
                     <em class="traco" id="precoAntigoProduto">
-                        De: <?php echo $dado['preco_antigo_produto']; ?>
-                        <!--AUTO PREENCHER-->
+                        De: <script>
+                            formatarValor(<?php echo $dado['preco_antigo_produto']; ?>, 'precoAntigoProduto')
+                        </script>
                     </em>
                     <br>
                     <span>
                         <br>
                         <strong class="preco-atual" id="precoAtualProduto">
-                            <?php echo $dado['preco_produto']; ?>
-                            <!--AUTO PREENCHER-->
+                            <script>
+                                formatarValor(<?php echo $dado['preco_produto']; ?>, 'precoAtualProduto')
+                            </script>
                         </strong>
                         a vista.
                     </span>

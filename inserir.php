@@ -2,7 +2,7 @@
 
 $SALVAR = $_POST['SALVAR'];
 
-if (isset($SALVAR)) {
+if (isset($SALVAR) && $SALVAR == 'SALVAR') {
     $nome = $_POST['nome_produto'];
     $descricao = $_POST['descricao_produto'];
     $descricaoCompleta = $_POST['descricao_completa_produto'];
@@ -23,8 +23,9 @@ if (isset($SALVAR)) {
     } else {
         echo "Error: " . $inserir . "<br>" . mysqli_error($conn);
     }
-    $SALVAR = null;
 }
+
+$SALVAR = null;
 
 ?>
 
@@ -129,7 +130,7 @@ if (isset($SALVAR)) {
             </div>
 
             <br>
-            <button type="submit" id="SALVAR" name="SALVAR" class="btn btn-success btn-lg btn-block">Criar Produto</button>
+            <button type="submit" id="SALVAR" name="SALVAR" value="SALVAR"  class="btn btn-success btn-lg btn-block">Criar Produto</button>
             <br><br><br><br><br><br><br><br><br><br>
         </form>
     </div>
