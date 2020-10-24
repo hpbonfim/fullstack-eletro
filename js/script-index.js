@@ -1,3 +1,5 @@
+/*  --------------------------------------------------------------  INDEX.PHP */
+
 document.addEventListener("DOMContentLoaded", () => {
 
     function rostoFeliz(){
@@ -15,3 +17,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('body').addEventListener('mousemove', rostoFeliz)
     
 })
+

@@ -25,6 +25,8 @@ if (isset($ID_PRODUTO)) {
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/detalhes-produto.css">
     <script src="./js/script-produtos.js"></script>
+    <script src="./js/script-carrinho.js"></script>
+
 </head>
 <?php while ($dado = $resultado->fetch_array()) { ?>
 
@@ -50,11 +52,15 @@ if (isset($ID_PRODUTO)) {
                     <a class="nav-link col px-md-5" href="contato.php"> Fale Conosco</a>
                 </li>
             </ul>
-
-            <a class="navbar-brand" href="index.php">
-                <img src="./images/carrinho_vazio.png" width="50" height="50" class="d-inline-block align-top" alt="carrinho_vazio">
-                <span class='badge badge-pill'>0</span>
-            </a>
+            <form action="carrinho.php" method="post" onsubmit="return getProdutosSelecionados();">
+                <a class="navbar-brand" type="button">
+                    <input type="hidden" id="produtosID" name="produtosID" value="">
+                <input type="hidden" id="quantidadeProdutoEscolhido" name="quantidadeProdutoEscolhido" value="">
+                    <img src="./images/carrinho_vazio.png" width="50" height="50" class="d-inline-block align-top" alt="carrinho_vazio" id="carrinhoImage">
+                    <span class='badge badge-pill' id="carrinho">0</span>
+                    <input class="carrinhoButton" type="submit" value="submit" style="position: absolute; margin-left: -50px; display: hidden; background-color: Transparent; outline:none; color:transparent; overflow: hidden; border: none;">
+                </a>
+            </form>
         </nav>
         <!-- FIM DO MENU -->
 
@@ -195,7 +201,7 @@ if (isset($ID_PRODUTO)) {
                     <span class="estrela">⭐</span>
                     <span class="">☆</span>
                 </div>
-                
+
             </div>
             <br>
         </section>

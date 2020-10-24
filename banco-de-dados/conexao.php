@@ -1,4 +1,18 @@
 <?php   
+    /* HEROKU CLEARDB MYSQL 
+    $url = parse_url(getenv("mysql://bcf9e54be7d410:d07828d3@us-cdbr-east-02.cleardb.com/heroku_062e8e4b10fd3ba?reconnect=true"));
+
+
+    $server = $url["host"];
+    $user = $url["user"];
+    $pass = $url["pass"];
+    $db = substr($url["path"], 1);
+
+    $conn = new mysqli($server, $user, $pass, $db);
+    */
+
+    /* ---- */
+
     $servername = "mysql";
     $username = "root";
     $password = "recode";

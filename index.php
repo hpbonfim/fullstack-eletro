@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <title>Full Stack Eletro</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/estilo.css">
     <link rel="stylesheet" href="./css/index.css">
     <script src="./js/script-index.js"></script>
+    <script src="./js/script-carrinho.js"></script>
 
 </head>
 
@@ -34,16 +34,20 @@
             </li>
         </ul>
 
-        <a class="navbar-brand" href="index.php">
-            <img src="./images/carrinho_vazio.png" width="50" height="50" class="d-inline-block align-top"
-                alt="carrinho_vazio">
-            <span class='badge badge-pill'>0</span>
-        </a>
+        <form action="carrinho.php" method="post" onsubmit="return getProdutosSelecionados();">
+            <a class="navbar-brand" type="button">
+                <input type="hidden" id="produtosID" name="produtosID" value="">
+                <input type="hidden" id="quantidadeProdutoEscolhido" name="quantidadeProdutoEscolhido" value="">
+                <img src="./images/carrinho_vazio.png" width="50" height="50" class="d-inline-block align-top" alt="carrinho_vazio" id="carrinhoImage">
+                <span class='badge badge-pill' id="carrinho">0</span>
+                <input class="carrinhoButton" type="submit" value="submit" style="position: absolute; margin-left: -50px; display: hidden; background-color: Transparent; outline:none; color:transparent; overflow: hidden; border: none;">
+            </a>
+        </form>
     </nav>
 
     <!-- FIM DO MENU -->
 
-  
+
 
     <!-- MAIN-->
     <main>
@@ -66,7 +70,7 @@
     </main>
     <!-- MAIN-->
 
-    
+
 
 
     <!-- FOOTER -->

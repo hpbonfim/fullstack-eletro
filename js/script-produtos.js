@@ -35,3 +35,4 @@ const formatarValor = (valor, elementId) => {
         currency: 'BRL'
     })
 }
+
