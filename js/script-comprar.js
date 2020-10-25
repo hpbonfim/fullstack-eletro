@@ -28,16 +28,20 @@ const updateAll = () => {
     precoTotalProdutos.push(preco_total)
   }
 
-  const adicionarProdutosFormulario = (id_produtos, nome, preco_unitario, preco_total, quantitade_produtos) => {
-    document.getElementById("id_produtos").value = id_produtos
-    document.getElementById("nome_produto").value = nome
+  const adicionarProdutosFormulario = (id_produto, nome_produto, preco_unitario, preco_total, quantitade_produtos) => {
+    document.getElementById("id_produto").value = id_produto
+    document.getElementById("nome_produto").value = nome_produto
     document.getElementById("valor_unitario_produto").value = preco_unitario
     document.getElementById("valor_total_produto").value = preco_total
     document.getElementById("quantidade_produto").value = quantitade_produtos
   }
 
-  getDetalhesProdutos()
-  adicionarProdutosFormulario(idProdutos, nomeProdutos, precoUnitarioProduto, precoTotalProdutos, quantidadeProdutos)
+  if (quantidadeProdutos == null || quantidadeProdutos == undefined || quantidadeProdutos.length <= 0) {
+    return
+  } else {
+    getDetalhesProdutos()
+    adicionarProdutosFormulario(idProdutos, nomeProdutos, precoUnitarioProduto, precoTotalProdutos, quantidadeProdutos)
+  }
 
 }
 
@@ -60,6 +64,3 @@ window.onclick = (event) => {
   return event.target == modalBox() ? modalBox().style.display = "none" : event
 }
 
-
-// console.log(getQuantidadeProduto())
-// console.log(getProdutoId())

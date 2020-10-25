@@ -161,8 +161,8 @@ function filtrarLista($ids)
                     <h5 class="subtitulo">Preencha o formulário de compra</h5>
                 </div>
                 <div class="card-body">
-                    <form action="enviar.php">
-                        <input type="hidden" name="id_produtos" id="id_produtos">
+                    <form action="enviar.php" method="POST">
+                        <input type="hidden" name="id_produto" id="id_produto">
                         <input type="hidden" name="nome_produto" id="nome_produto">
                         <input type="hidden" name="valor_unitario_produto" id="valor_unitario_produto">
                         <input type="hidden" name="valor_total_produto" id="valor_total_produto">
@@ -177,12 +177,12 @@ function filtrarLista($ids)
                                 <input class="form-control" type="number" id="telefone_cliente" name="telefone_cliente" placeholder="Digite seu número de telefone">
                             </div>
                             <div class="form-group col-md-12">
-                                <label for="inputAddress">Endereço</label>
-                                <input class="form-control" type="text" class="form-control" id="inputAddress" placeholder="Digite seu endereço. por exemplo: Rua das Avenidas, Nº 0 - 12345-678">
+                                <label for="endereco_cliente">Endereço</label>
+                                <input class="form-control" type="text" class="form-control" id="endereco_cliente" name="endereco_cliente" placeholder="Digite seu endereço. por exemplo: Rua das Avenidas, Nº 0 - 12345-678">
                             </div>
                         </div>
                         <br>
-                        <button type="submit" name="salvarFormulario" value="salvarFormulario" class="btn btn-success">Efetuar compra</button>
+                        <button type="submit" name="salvarFormulario" id="salvarFormulario" value="salvarFormulario" class="btn btn-success" onclick="alert('Compra efetuada com sucesso!'), cleanAll()">Efetuar compra</button>
                     </form>
                 </div>
             </div>

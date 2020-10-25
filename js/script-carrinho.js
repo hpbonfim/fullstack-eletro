@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const checkSessionStorageState = () => {
     let checkState = getProdutosSelecionados()
-    if(checkState.length <= 0)
+    if (checkState.length <= 0)
         sessionStorage.clear()
 }
 
@@ -139,7 +139,7 @@ const deletarCarrinho = () => {
     let apagar = confirm("Deseja apagar seu carrinho de compras?")
 
     if (apagar) {
-        sessionStorage.clear()
+        cleanAll()
         window.location.pathname = '/carrinho.php'
     }
 }
@@ -172,4 +172,8 @@ const postProdutosSelecionados = () => {
 const comprarProduto = (produtoId) => {
     adicionarNoCarrinho(produtoId)
     postProdutosSelecionados()
+}
+
+const cleanAll = () => {
+    sessionStorage.clear()
 }
