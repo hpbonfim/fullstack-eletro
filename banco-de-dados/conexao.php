@@ -5,7 +5,7 @@ $username = "pjkzxaixobtarh";
 $password = "14fa59ec81efe1f415dc9b89c1c3c4f392c1e4351c1959d98e34d2dd7bfaffdc";
 $database = "d54ikg6rb6ffr";
 
-$con_string = "host=" . $servername . "port=5432 dbname=" . $database . " user=" . $username . " password=" . $password . "";
+$con_string = "host=$servername port=5432 dbname=$database user=$username password=$password ";
 
 $conn = pg_connect($con_string) or die('Conexão com banco de dados falhou');
 
