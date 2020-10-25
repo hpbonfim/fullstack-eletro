@@ -5,23 +5,23 @@ $SALVAR = $_POST['SALVAR'];
 if (isset($SALVAR) && $SALVAR == 'SALVAR') {
     $nome = $_POST['nome_produto'];
     $descricao = $_POST['descricao_produto'];
-    $descricaoCompleta = $_POST['descricao_completa_produto'];
-    $precoAntigo = $_POST['preco_antigo_produto'];
     $preco = $_POST['preco_produto'];
     $imagem = $_POST['imagem_produto'];
+    $categoria = $_POST['categoria_produto'];
+    $precoAntigo = $_POST['preco_antigo_produto'];
     $imagem1 = $_POST['1_imagem_produto'];
     $imagem2 = $_POST['2_imagem_produto'];
     $imagem3 = $_POST['3_imagem_produto'];
     $imagem4 = $_POST['4_imagem_produto'];
-    $categoria = $_POST['categoria_produto'];
+    $descricaoCompleta = $_POST['descricao_completa_produto'];
 
-    $inserir = "INSERT INTO produtos (nome_produto, descricao_produto, descricao_completa_produto, preco_antigo_produto, preco_produto, imagem_produto, 1_imagem_produto, 2_imagem_produto, 3_imagem_produto, 4_imagem_produto, categoria_produto) VALUES ( '$nome', '$descricao', '$descricaoCompleta', '$precoAntigo','$preco', '$imagem', '$imagem1', '$imagem2', '$imagem3', '$imagem4', '$categoria')";
-
+    $inserir = "INSERT INTO produtos ( nome_produto, descricao_produto, preco_produto, imagem_produto, categoria_produto, preco_antigo_produto, 1_imagem_produto, 2_imagem_produto, 3_imagem_produto, 4_imagem_produto, descricao_completa_produto) VALUES('$nome','$descricao','$preco','$imagem','$categoria','$precoAntigo','$imagem1','$imagem2','$imagem3','$imagem4','$descricaoCompleta')";
 
     if (mysqli_query($conn, $inserir)) {
         echo "<script> alert('Criado com sucesso!')</script>";
     } else {
-        echo "Error: " . $inserir . "<br>" . mysqli_error($conn);
+        echo "<script> alert('Erro ao criar!')</script>";
+        echo "<script> console.log('.$inserir.')</script>";
     }
 }
 
@@ -53,7 +53,7 @@ $SALVAR = null;
 </style>
 
 <body>
-    
+
 
     <div class="container-lg">
 
@@ -63,11 +63,11 @@ $SALVAR = null;
             </button>
         </a>
 
-        
+
 
         <h1>CRIAR PRODUTO</h1>
 
-        
+
 
         <form action="" method="post">
             <div class="form-group">
@@ -130,8 +130,8 @@ $SALVAR = null;
             </div>
 
             <br>
-            <button type="submit" id="SALVAR" name="SALVAR" value="SALVAR"  class="btn btn-success btn-lg btn-block">Criar Produto</button>
-            
+            <button type="submit" id="SALVAR" name="SALVAR" value="SALVAR" class="btn btn-success btn-lg btn-block">Criar Produto</button>
+
         </form>
     </div>
 </body>
