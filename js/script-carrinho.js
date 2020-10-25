@@ -139,7 +139,7 @@ const postProdutosSelecionados = () => {
     produtoId = document.createElement('input')
     produtoId.type = 'hidden'
     produtoId.name = 'produtosId'
-    produtoId.value = getProdutosId()
+    produtoId.value = sessionStorage.getItem('produtosId')
 
     // Criação de um elemento (quantidadeProdutos) para adicionar um valor ao form
     quantidadeProdutos = document.createElement('input')
