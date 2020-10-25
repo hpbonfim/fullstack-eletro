@@ -1,8 +1,9 @@
 <?php include_once("./banco-de-dados/conexao.php");
 
-$arrayProdutos = json_decode($_POST['produtosID']);
+$arrayProdutos = json_decode($_POST['produtosId']);
 $arrayQuantidade = json_decode($_POST['quantidadeProdutoEscolhido']);
-if (isset($arrayProdutos)) {
+
+if (isset($arrayProdutos) ) {
     $produtoId = implode(', ', $arrayProdutos);
     echo "<script>console.log('$arrayQuantidade')</script>";
 
@@ -47,6 +48,8 @@ function filtrarLista($ids)
 </head>
 
 <body>
+    <div id="fake-form-container" style="display:none;"></div>
+
     <!-- MENU -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="index.php">
@@ -68,15 +71,10 @@ function filtrarLista($ids)
             </li>
         </ul>
 
-        <form action="carrinho.php" method="post" onsubmit="return getProdutosSelecionados();">
-            <a class="navbar-brand" type="button">
-                <input type="hidden" id="produtosID" name="produtosID" value="">
-                <input type="hidden" id="quantidadeProdutoEscolhido" name="quantidadeProdutoEscolhido" value="">
-                <img src="./images/carrinho_vazio.png" width="50" height="50" class="d-inline-block align-top" alt="carrinho_vazio" id="carrinhoImage">
-                <span class='badge badge-pill' id="carrinho">0</span>
-                <input class="carrinhoButton" type="submit" value="submit" style="position: absolute; margin-left: -50px; display: hidden; background-color: Transparent; outline:none; color:transparent; overflow: hidden; border: none;">
-            </a>
-        </form>
+        <a class="navbar-brand" type="button" onclick="postProdutosSelecionados()">
+            <img src="./images/carrinho_vazio.png" width="50" height="50" class="d-inline-block align-top" alt="carrinho_vazio" id="carrinhoImage">
+            <span class='badge badge-pill' id="carrinho">0</span>
+        </a>
     </nav>
 
 
@@ -95,8 +93,6 @@ function filtrarLista($ids)
 
     <!-- CONTEÚDO -->
     <div class="container-fluid d-flex justify-content-around">
-
-
         <table class="table table-hover text-center">
             <thead class="thead-dark">
                 <tr>
@@ -126,13 +122,19 @@ function filtrarLista($ids)
                         </tr>
                 <?php }
                 } ?>
-
             </tbody>
         </table>
 
     </div>
     <div class="container d-flex justify-content-center">
-        <div class="w-50">
+        <div class="w-50 m-1">
+            <a class="button" onclick="deletarCarrinho()">
+                <button type="button" class="btn btn-danger">Remover todos os produtos</button>
+            </a>
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center">
+        <div class="w-100">
             <a class="button">
                 <button type="button" class="btn btn-success">Comprar</button>
             </a>
