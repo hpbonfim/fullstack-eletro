@@ -163,8 +163,8 @@ filtrarLista();
                                                 <button type="button" class="btn btn-primary" onclick="adicionarNoCarrinho('<?php echo $dado['id_produto']; ?>')">Colocar no Carrinho</button>
                                             </a>
 
-                                            <a class="button" href="detalhe-produto.php?ID=<?php echo $dado['id_produto']; ?>">
-                                                <button type="button" class="btn btn-success">Comprar</button>
+                                            <a class="button">
+                                                <button type="button" class="btn btn-success" onclick="comprarProduto('<?php echo $dado['id_produto']; ?>')">Comprar</button>
                                             </a>
                                         </div>
                                     </div>

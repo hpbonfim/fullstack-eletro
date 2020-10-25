@@ -167,3 +167,9 @@ const postProdutosSelecionados = () => {
     // submit para o php
     formulario.submit()
 }
+
+
+const comprarProduto = (produtoId) => {
+    adicionarNoCarrinho(produtoId)
+    postProdutosSelecionados()
+}

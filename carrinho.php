@@ -40,8 +40,9 @@ function filtrarLista($ids)
     <title>Carrinho - Full Stack Eletro</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="stylesheet" href="./css/contato.css">
+    <link rel="stylesheet" href="./css/modal.css">
     <script src="./js/script-carrinho.js"></script>
+    <script src="./js/script-comprar.js"></script>
 </head>
 
 <body>
@@ -116,7 +117,7 @@ function filtrarLista($ids)
                     <?php while ($dado = $resultado->fetch_array()) { ?>
                         <tr>
                             <th scope="row" style="display: none;" id="<?php echo $dado['id_produto']; ?>"></th>
-                            <td class="text-left"><strong><?php echo $dado['nome_produto']; ?></strong></td>
+                            <td class="text-left" id="nomeProduto_<?php echo $dado['id_produto']; ?>"><?php echo $dado['nome_produto']; ?></td>
                             <td id="precoProduto_<?php echo $dado['id_produto']; ?>"><?php echo $dado['preco_produto']; ?></td>
                             <td id="somaProduto_<?php echo $dado['id_produto']; ?>"></td>
                             <td id="quantidadeProduto_<?php echo $dado['id_produto']; ?>"></td>
@@ -142,10 +143,51 @@ function filtrarLista($ids)
         <div class="container d-flex justify-content-center">
             <div class="w-100">
                 <a class="button">
-                    <button type="button" class="btn btn-success">Comprar</button>
+                    <button type="button" class="btn btn-success" onclick="mostrarModal()">Comprar</button>
                 </a>
             </div>
         </div>
+
+        <!-- Formulário -->
+        <div id="modalBox" class="modal">
+
+            <div class="card text-center modal-content">
+                <div class="card-header">
+                    <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item">
+                            <button class="btn btn-danger" onclick="fecharModal()"> &times; Voltar</button>
+                        </li>
+                    </ul>
+                    <h5 class="subtitulo">Preencha o formulário de compra</h5>
+                </div>
+                <div class="card-body">
+                    <form action="enviar.php">
+                        <input type="hidden" name="id_produtos" id="id_produtos">
+                        <input type="hidden" name="nome_produto" id="nome_produto">
+                        <input type="hidden" name="valor_unitario_produto" id="valor_unitario_produto">
+                        <input type="hidden" name="valor_total_produto" id="valor_total_produto">
+                        <input type="hidden" name="quantidade_produto" id="quantidade_produto">
+                        <div class="form-row">
+                            <div class="form-group col-md-9">
+                                <label for="nome_cliente">Nome</label>
+                                <input class="form-control" type="text" id="nome_cliente" name="nome_cliente" placeholder="Digite seu nome">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="telefone_cliente">Telefone</label>
+                                <input class="form-control" type="number" id="telefone_cliente" name="telefone_cliente" placeholder="Digite seu número de telefone">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="inputAddress">Endereço</label>
+                                <input class="form-control" type="text" class="form-control" id="inputAddress" placeholder="Digite seu endereço. por exemplo: Rua das Avenidas, Nº 0 - 12345-678">
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" name="salvarFormulario" value="salvarFormulario" class="btn btn-success">Efetuar compra</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Fim Formulário -->
 
     <?php } ?>
     <!-- FIM CONTEÚDO -->
