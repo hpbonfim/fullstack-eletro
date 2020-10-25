@@ -2,7 +2,7 @@
 
 $arrayProdutos = json_decode($_POST['produtosId']);
 
-if (isset($arrayProdutos) ) {
+if (isset($arrayProdutos)) {
     $produtoId = implode(', ', $arrayProdutos);
     filtrarLista($produtoId);
 }
@@ -74,37 +74,46 @@ function filtrarLista($ids)
         </a>
     </nav>
 
-
     <!-- MAIN-->
     <main>
         <header>
             <p class="titulo">
                 Carrinho
             </p>
-            <p class="subtitulo">Verifique se está tudo certo!</p>
+            <?php if (isset($resultado)) { ?>
+                <p class="subtitulo">Verifique se está tudo certo!</p>
+            <?php } else { ?>
+                <p class="subtitulo">Não há nada no carrinho!</p>
+                <div class="container d-flex justify-content-center">
+                    <div class="w-100">
+                        <a class="button" href="produtos.php">
+                            <button type="button" class="btn btn-info">Ver Produtos</button>
+                        </a>
+                    </div>
+                </div>
+            <?php }  ?>
             <hr>
         </header>
     </main>
     <!-- MAIN-->
 
 
-    <!-- CONTEÚDO -->
-    <div class="container-fluid d-flex justify-content-around">
-        <table class="table table-hover text-center">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col" style="display: none;">#</th>
-                    <th scope="col">Nome Produto</th>
-                    <th scope="col">Valor unitário</th>
-                    <th scope="col">Valor Total</th>
-                    <th scope="col">Quantidade</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if (isset($resultado)) {
-                    while ($dado = $resultado->fetch_array()) {
-                ?>
+    <?php if (isset($resultado)) { ?>
+        <!-- CONTEÚDO -->
+        <div class="container-fluid d-flex justify-content-around">
+            <table class="table table-hover text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" style="display: none;">#</th>
+                        <th scope="col">Nome Produto</th>
+                        <th scope="col">Valor unitário</th>
+                        <th scope="col">Valor Total</th>
+                        <th scope="col">Quantidade</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($dado = $resultado->fetch_array()) { ?>
                         <tr>
                             <th scope="row" style="display: none;" id="<?php echo $dado['id_produto']; ?>"></th>
                             <td class="text-left"><strong><?php echo $dado['nome_produto']; ?></strong></td>
@@ -117,26 +126,28 @@ function filtrarLista($ids)
                                 <a type="button" onclick="removerProduto('<?php echo $dado['id_produto']; ?>')"><img src="./images/remover.png" alt="remover" width="30px;"></a>
                             </td>
                         </tr>
-                <?php }
-                } ?>
-            </tbody>
-        </table>
+                    <?php } ?>
 
-    </div>
-    <div class="container d-flex justify-content-center">
-        <div class="w-50 m-1">
-            <a class="button" onclick="deletarCarrinho()">
-                <button type="button" class="btn btn-danger">Remover todos os produtos</button>
-            </a>
+                </tbody>
+            </table>
+
         </div>
-    </div>
-    <div class="container d-flex justify-content-center">
-        <div class="w-100">
-            <a class="button">
-                <button type="button" class="btn btn-success">Comprar</button>
-            </a>
+        <div class="container d-flex justify-content-center">
+            <div class="w-50 m-1">
+                <a class="button" onclick="deletarCarrinho()">
+                    <button type="button" class="btn btn-danger">Remover todos os produtos</button>
+                </a>
+            </div>
         </div>
-    </div>
+        <div class="container d-flex justify-content-center">
+            <div class="w-100">
+                <a class="button">
+                    <button type="button" class="btn btn-success">Comprar</button>
+                </a>
+            </div>
+        </div>
+
+    <?php } ?>
     <!-- FIM CONTEÚDO -->
 
 
