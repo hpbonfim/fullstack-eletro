@@ -41,7 +41,8 @@ function filtrarLista()
             $VAZIO = true;
         }
     } else {
-        echo "Error: " . $SQL . "<br>" . mysqli_error($conn);
+        $VAZIO = true;
+        echo "<script>console.log('Banco de dados vazio')</script>";
     }
 
     $palavra_chave = null;
