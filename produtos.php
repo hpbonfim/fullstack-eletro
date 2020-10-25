@@ -4,7 +4,7 @@
 // LISTA SELECT CATEGORIAS
 function listaCategorias()
 {
-    global $conn,  $categorias, $total_produtos;
+    global $conn,  $categorias, $total_produtos, $VAZIO;
 
     // $sql_categorias = "SELECT DISTINCT categoria_produto FROM produtos";
     $sql_contagem = "SELECT categoria_produto, COUNT(categoria_produto) FROM produtos GROUP BY categoria_produto";
@@ -14,8 +14,8 @@ function listaCategorias()
         $categorias = mysqli_query($conn, $sql_contagem);
         $total_produtos = mysqli_query($conn, $sql_total);
     } else {
-        echo "Error: " . $sql_contagem . "<br>" . mysqli_error($conn);
-        echo "Error: " . $total_produtos . "<br>" . mysqli_error($conn);
+        $VAZIO = true;
+        echo "<script>console.log('Banco de dados está vazio')</script>";
     }
 }
 // FIM LISTA
@@ -42,7 +42,7 @@ function filtrarLista()
         }
     } else {
         $VAZIO = true;
-        echo "<script>console.log('Banco de dados vazio')</script>";
+        echo "<script>console.log('Banco de dados está vazio')</script>";
     }
 
     $palavra_chave = null;
