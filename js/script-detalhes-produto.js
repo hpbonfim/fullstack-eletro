@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         for (let img = 0; img < coletaniaImagens.length; img++) {
             let imagemUrl = coletaniaImagens[img]
-            let imgTag = `<li><button class="button-coletania" onclick="visualizarImagemSelecionada('${imagemUrl}','${tituloProduto()}')"><img src="${imagemUrl}" alt="${tituloProduto()}"></button></li>`
+            let imgTag = `<li><button class="button-coletania" onclick="visualizarImagemSelecionada('${detalhesProduto.imagemProduto}','${tituloProduto()}')"><img src="${detalhesProduto.imagemProduto}" alt="${tituloProduto()}"></button></li>`
             coletaniaImagensProdutoId.insertAdjacentHTML("afterbegin", imgTag)
         }
     }
