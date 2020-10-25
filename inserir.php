@@ -21,7 +21,7 @@ if (isset($SALVAR) && $SALVAR == 'SALVAR') {
         echo "<script> alert('Criado com sucesso!')</script>";
     } else {
         echo "<script> alert('Erro ao criar!')</script>";
-        echo "<script> console.log('.$inserir.')</script>";
+        echo "<script> console.log('$inserir')</script>";
     }
 }
 
