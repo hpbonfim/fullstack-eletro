@@ -1,12 +1,9 @@
 <?php include_once("./banco-de-dados/conexao.php");
 
 $arrayProdutos = json_decode($_POST['produtosId']);
-$arrayQuantidade = json_decode($_POST['quantidadeProdutoEscolhido']);
 
 if (isset($arrayProdutos) ) {
     $produtoId = implode(', ', $arrayProdutos);
-    echo "<script>console.log('$arrayQuantidade')</script>";
-
     filtrarLista($produtoId);
 }
 

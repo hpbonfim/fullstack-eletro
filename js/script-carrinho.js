@@ -1,8 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
+    checkSessionStorageState()
     carrinhoState()
     produtosSelecionadosState()
 })
 
+const checkSessionStorageState = () => {
+    let checkState = getProdutosSelecionados()
+    if(checkState.length <= 0)
+        sessionStorage.clear()
+}
 
 const carrinhoState = () => {
     let carrinho = document.querySelector("#carrinho")
@@ -26,13 +32,21 @@ const produtosSelecionadosState = () => {
     let quantidadeProdutos = getQuantidadeProduto()
 
     for (let produtoID in quantidadeProdutos) {
-        let quantidadeProduto = document.getElementById(`quantidadeProduto_${produtoID}`)
-        let precoUnitarioProduto = document.getElementById(`precoProduto_${produtoID}`)
-        let precoTotalProduto = document.getElementById(`somaProduto_${produtoID}`)
-
-        precoTotalProduto.innerHTML = precoUnitarioProduto.textContent * quantidadeProdutos[produtoID]
-        quantidadeProduto.innerHTML = `<input type="number" value="${quantidadeProdutos[produtoID]}" min="1" max="1000" style="width: 50px;" disabled>`
+        updateProdutosSelecionados(produtoID, quantidadeProdutos)
     }
+}
+
+const updateProdutosSelecionados = (produtoID, quantidadeProdutos) => {
+    let quantidadeProduto = document.getElementById(`quantidadeProduto_${produtoID}`)
+    let precoUnitarioProduto = document.getElementById(`precoProduto_${produtoID}`)
+    let precoTotalProduto = document.getElementById(`somaProduto_${produtoID}`)
+
+    precoTotalProduto.innerHTML = precoUnitarioProduto.textContent * quantidadeProdutos[produtoID]
+    quantidadeProduto.innerHTML = `<input type="number" value="${quantidadeProdutos[produtoID]}" min="1" max="1000" style="width: 50px;" disabled>`
+}
+
+const getProdutoId = () => {
+    return sessionStorage.getItem('produtosId') == null || sessionStorage.getItem('quantidadeProdutos') == undefined ? null : sessionStorage.getItem('produtosId')
 }
 
 const getQuantidadeProduto = () => {
@@ -43,11 +57,11 @@ const getProdutosSelecionados = () => {
     return sessionStorage.getItem('produtosSelecionados') == null || sessionStorage.getItem('produtosSelecionados') == undefined ? [] : JSON.parse(sessionStorage.getItem('produtosSelecionados'))
 }
 
-const getListaQuantidadeTotal = (produtosEscolhidos) => {
+const getListaQuantidadeTotalState = (produtosEscolhidos) => {
     return produtosEscolhidos.reduce((map, val) => { map[val] = (map[val] || 0) + 1; return map }, {})
 }
 
-const getProdutosId = (listarQuantidadeProdutos) => {
+const getProdutosIdState = (listarQuantidadeProdutos) => {
     let produtosId = []
     for (let id in listarQuantidadeProdutos) { produtosId.push(id) }
 
@@ -72,7 +86,7 @@ const setProdutosSelecionados = (produtoId, method) => {
 
             produtosSelecionados.push(produtoId)
 
-            setAll(produtosSelecionados, getListaQuantidadeTotal(produtosSelecionados), getProdutosId(getListaQuantidadeTotal(produtosSelecionados)))
+            setAll(produtosSelecionados, getListaQuantidadeTotalState(produtosSelecionados), getProdutosIdState(getListaQuantidadeTotalState(produtosSelecionados)))
             carrinhoState()
             produtosSelecionadosState()
             break;
@@ -81,10 +95,9 @@ const setProdutosSelecionados = (produtoId, method) => {
 
             if (quantidadeProdutos[produtoId] > 1) {
 
-                let removerId = produtosSelecionados.indexOf(produtoId)
-                removerId >= 0 ? produtosSelecionados.splice(removerId, 1) : null
+                produtosSelecionados.splice(produtosSelecionados.indexOf(produtoId), 1)
 
-                setAll(produtosSelecionados, getListaQuantidadeTotal(produtosSelecionados), getProdutosId(getListaQuantidadeTotal(produtosSelecionados)))
+                setAll(produtosSelecionados, getListaQuantidadeTotalState(produtosSelecionados), getProdutosIdState(getListaQuantidadeTotalState(produtosSelecionados)))
                 produtosSelecionadosState()
                 carrinhoState()
             }
@@ -95,7 +108,11 @@ const setProdutosSelecionados = (produtoId, method) => {
 
             if (confirmar) {
 
-                setAll(produtosSelecionados, getListaQuantidadeTotal(produtosSelecionados), getProdutosId(getListaQuantidadeTotal(produtosSelecionados)))
+                produtosSelecionados = produtosSelecionados.filter(e => e !== produtoId)
+
+                setAll(produtosSelecionados, getListaQuantidadeTotalState(produtosSelecionados), getProdutosIdState(getListaQuantidadeTotalState(produtosSelecionados)))
+                checkSessionStorageState()
+                produtosSelecionadosState()
                 postProdutosSelecionados()
                 carrinhoState()
             }
@@ -129,7 +146,7 @@ const deletarCarrinho = () => {
 
 const postProdutosSelecionados = () => {
 
-    let formulario, produtoId, quantidadeProdutos
+    let formulario, produtoId
     // Criando um <form>
     formulario = document.createElement('form')
     formulario.action = 'carrinho.php'
@@ -139,17 +156,10 @@ const postProdutosSelecionados = () => {
     produtoId = document.createElement('input')
     produtoId.type = 'hidden'
     produtoId.name = 'produtosId'
-    produtoId.value = sessionStorage.getItem('produtosId')
-
-    // Criação de um elemento (quantidadeProdutos) para adicionar um valor ao form
-    quantidadeProdutos = document.createElement('input')
-    quantidadeProdutos.type = 'hidden'
-    quantidadeProdutos.name = 'quantidadeProdutos'
-    quantidadeProdutos.value = JSON.stringify(sessionStorage.getItem('quantidadeProdutos'))
+    produtoId.value = getProdutoId()
 
     // Juntando tudo ao forms
     formulario.appendChild(produtoId)
-    formulario.appendChild(quantidadeProdutos)
 
     // Adicionando no fake container
     document.getElementById('fake-form-container').appendChild(formulario)
