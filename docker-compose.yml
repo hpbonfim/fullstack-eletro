@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_USER: recode
+      MYSQL_DATABASE: recode
+      MYSQL_PASSWORD: recode
+      MYSQL_ROOT_PASSWORD: recode
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - intranet
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    depends_on:
+      - mysql
+    ports:
+      - 8080:80
+    networks:
+      - intranet
+
+  php:
+    image: hpbonfim/php-apache:latest
+    container_name: php
+    ports:
+      - 80:80
+    restart: unless-stopped
+    volumes:
+      - ./http:/var/www/html
+    networks:
+      - intranet
+
+networks:
+  intranet:
+
+volumes:
+  portainer_data:
+  mysql_data:
