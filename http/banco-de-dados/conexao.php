@@ -2,7 +2,6 @@
 // HEROKU DATABASE POSTGRES
 // $conn = pg_connect(getenv("DATABASE_URL")) or die('Conexão com banco de dados falhou');
 
-// HEROKU DATABASE MYSQL
 $url = getenv('JAWSDB_URL');
 $dbparts = parse_url($url);
 
@@ -17,7 +16,7 @@ if (!$conn) { // Verificando a conexão
     die("A conexão com o Banco de dados falhou: " . mysqli_connect_error());
 }
 
-/* LOCALHOST DOCKER */
+/* ---- */
 /*
     $servername = "mysql";
     $username = "root";
