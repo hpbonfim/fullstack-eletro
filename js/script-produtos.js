@@ -1,7 +1,7 @@
 const visualizarImagemSelecionada = (coletaniaImagensImg, tituloProduto) => {
     if (coletaniaImagensImg != null && coletaniaImagensImg != undefined) {
         const imagemProdutoId = document.getElementById("imagemProduto")
-        const novaImgTag = `<img src="${coletaniaImagensImg}" alt="${tituloProduto}">`
+        const novaImgTag = `<img src="${coletaniaImagensImg}" alt="${tituloProduto.replace(/["']/g, "")}">`
         imagemProdutoId.innerHTML = novaImgTag
     }
     return
