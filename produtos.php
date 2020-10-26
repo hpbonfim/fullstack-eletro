@@ -139,7 +139,7 @@ filtrarLista();
                             <section class="col">
                                 <br>
                                 <div class="col ">
-                                    <div class="card" style="width: 22vw; height: 80vh;" id="<?php echo $dado['id_produto']; ?>">
+                                    <div class="card" style="width: 22vw; height: auto;" id="<?php echo $dado['id_produto']; ?>">
                                         <img class="card-img-top" style="padding: 1vw;" src="<?php echo $dado['imagem_produto']; ?>" alt="<?php echo $dado['nome_produto']; ?>">
                                         <div class="card-body">
                                             <h5 class="card-title"><?php echo $dado['nome_produto']; ?></h5>
