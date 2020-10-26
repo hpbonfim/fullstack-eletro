@@ -2,6 +2,7 @@
 // HEROKU DATABASE POSTGRES
 // $conn = pg_connect(getenv("DATABASE_URL")) or die('Conexão com banco de dados falhou');
 
+
 $url = getenv('JAWSDB_URL');
 $dbparts = parse_url($url);
 
@@ -13,7 +14,17 @@ $database = ltrim($dbparts['path'], '/');
 $conn = mysqli_connect($hostname, $username, $password, $database);
 
 if (!$conn) { // Verificando a conexão
-    die("A conexão com o Banco de dados falhou: " . mysqli_connect_error());
+    $servername = "mysql";
+    $username = "root";
+    $password = "recode";
+    $database = "fullstack-eletro";
+
+    // Criando conexão
+    $conn = mysqli_connect($servername, $username, $password, $database);
+
+    if (!$conn) { // Verificando a conexão
+        die("A conexão com o Banco de dados falhou: " . mysqli_connect_error());
+    }
 }
 
 /* ---- */
