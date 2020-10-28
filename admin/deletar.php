@@ -1,4 +1,4 @@
-<?php include_once('./banco-de-dados/conexao.php'); 
+<?php include_once('../banco-de-dados/conexao.../'); 
 
 $ID_PRODUTO = $_GET['ID'];
 

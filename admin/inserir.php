@@ -1,4 +1,4 @@
-<?php include('./banco-de-dados/conexao.php');
+<?php include('../banco-de-dados/conexao.php');
 
 $SALVAR = $_POST['SALVAR'];
 
